@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
 public final class StackUtils
@@ -50,7 +51,15 @@ public final class StackUtils
 			return false;
 		}
 
-		return stack1.getItem() != stack2.getItem() || stack1.getItemDamage() != stack2.getItemDamage();
+		return stack1.getItem() != stack2.getItem() || stack1.getItemDamage() != stack2.getItemDamage() || !compareNBT(stack1.stackTagCompound, stack2.stackTagCompound);
+	}
+
+	public static boolean compareNBT(NBTTagCompound nbt1, NBTTagCompound nbt2) {
+		if (nbt1 == null || nbt2 == null) {
+			return false;
+		}
+
+		return nbt1 == nbt2 || nbt1.equals(nbt2);
 	}
 
 	public static boolean equalsWildcard(ItemStack wild, ItemStack check)
@@ -59,7 +68,9 @@ public final class StackUtils
 		{
 			return check == wild;
 		}
-		
+		if (!wild.isStackable() || !check.isStackable())
+			return false;
+
 		return wild.getItem() == check.getItem() && (wild.getItemDamage() == OreDictionary.WILDCARD_VALUE || wild.getItemDamage() == check.getItemDamage());
 	}
 
