@@ -50,61 +50,63 @@ public class BinRecipe implements IRecipe
 
 	public ItemStack getResult(IInventory inv)
 	{
-		ItemStack bin = null;
-
-		for(int i = 0; i < inv.getSizeInventory(); i++)
-		{
-			ItemStack stack = inv.getStackInSlot(i);
-
-			if(isBin(stack))
-			{
-				if(bin != null)
-				{
-					return null;
-				}
-
-				bin = stack.copy();
-			}
-		}
-
-		if(bin == null || bin.stackSize > 1)
-		{
-			return null;
-		}
-
-		ItemStack addStack = null;
-
-		for(int i = 0; i < 9; i++)
-		{
-			ItemStack stack = inv.getStackInSlot(i);
-
-			if(stack != null && !isBin(stack))
-			{
-				if(addStack != null)
-				{
-					return null;
-				}
-
-				addStack = stack.copy();
-			}
-		}
-
-		InventoryBin binInv = new InventoryBin(bin);
-
-		if(addStack != null)
-		{
-			if(binInv.getItemType() != null && !binInv.getItemType().isItemEqual(addStack))
-			{
-				return null;
-			}
-
-			binInv.add(addStack);
-			
-			return bin;
-		}
-		else {
-			return binInv.removeStack();
-		}
+//		ItemStack bin = null;
+//
+//		for(int i = 0; i < inv.getSizeInventory(); i++)
+//		{
+//			ItemStack stack = inv.getStackInSlot(i);
+//
+//			if(isBin(stack))
+//			{
+//				if(bin != null)
+//				{
+//					return null;
+//				}
+//
+//				bin = stack.copy();
+//			}
+//		}
+//
+//		if(bin == null || bin.stackSize > 1)
+//		{
+//			return null;
+//		}
+//
+//		ItemStack addStack = null;
+//
+//		for(int i = 0; i < 9; i++)
+//		{
+//			ItemStack stack = inv.getStackInSlot(i);
+//
+//			if(stack != null && !isBin(stack))
+//			{
+//				if(addStack != null)
+//				{
+//					return null;
+//				}
+//
+//				addStack = stack.copy();
+//			}
+//		}
+//
+//		InventoryBin binInv = new InventoryBin(bin);
+//
+//		if(addStack != null)
+//		{
+//			if(binInv.getItemType() != null && !binInv.getItemType().isItemEqual(addStack))
+//			{
+//				return null;
+//			}
+//
+//			binInv.add(addStack);
+//
+//			return bin;
+//		}
+//		else {
+//			return binInv.removeStack();
+//		}
+		//TODO: Actually fix this dupe.
+		return null;
 	}
 
 	@Override
